@@ -25,5 +25,13 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             finish() // Close splash so user can't go back to it
         }
+
+        lifecycleScope.launch {
+            delay(2000) // 2 seconds
+            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            finish() // Close splash so user can't go back to it
+        }
+
+
     }
 }
