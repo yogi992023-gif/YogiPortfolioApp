@@ -10,4 +10,7 @@ interface ProductRepository {
     fun getProductDetails(id : Int) : Flow<ApiResult<ProductEntity>>
 
     fun getPagedProducts(limit : Int, skip : Int) : Flow<ApiResult<List<ProductEntity>>>
+
+    fun searchProducts(query: String): Flow<ApiResult<List<ProductEntity>>>
+
 }

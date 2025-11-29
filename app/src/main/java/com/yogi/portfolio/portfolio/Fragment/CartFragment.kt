@@ -20,6 +20,7 @@ import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.data.API.RoomEntity.CartEntity
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.logging.HttpLoggingInterceptor
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CartFragment : Fragment() {
@@ -76,7 +77,7 @@ class CartFragment : Fragment() {
 
             // Total calculation
             val total = list.sumOf { it.price * it.quantity }
-            binding.tvTotalAmount.text = "Total : ₹ $total"
+            binding.tvTotalAmount.text = "Total : ₹ ${total.roundToInt()}"
         }
     }
 

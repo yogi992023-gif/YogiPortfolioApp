@@ -36,4 +36,12 @@ class ProductViewModel @Inject constructor(private val repository: ProductReposi
         }
         skip += limit
     }
+
+    fun searchProducrt(query: String) {
+        viewModelScope.launch {
+            repository.searchProducts(query).collect {
+                _productState.value = it
+            }
+        }
+    }
 }

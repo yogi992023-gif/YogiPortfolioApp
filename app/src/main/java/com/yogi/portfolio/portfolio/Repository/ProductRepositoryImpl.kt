@@ -53,4 +53,15 @@ class ProductRepositoryImpl @Inject constructor(private val api: ProductApi,
             emit(ApiResult.Error(e.message ?: "Error"))
         }
     }
+
+    override fun searchProducts(query: String): Flow<ApiResult<List<ProductEntity>>>  = flow{
+        emit(ApiResult.Loading)
+        try {
+            val response = api.searchProducts(query)
+            emit(ApiResult.Success(response.products.map { it.toEntity() }))
+        } catch (e: Exception) {
+            emit(ApiResult.Error(e.message ?: "Search failed"))
+        }
+
+    }
 }

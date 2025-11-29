@@ -27,7 +27,8 @@ object DatabaseModule {
 
     @Provides
     fun provideProductDao(db: AppDatabase) = db.productDao()
-
     @Provides
     fun provideCartDao(db: AppDatabase) = db.cartDao()
+    @Provides
+    fun provideMenuDao(db: AppDatabase) = db.menuDao()
 }
