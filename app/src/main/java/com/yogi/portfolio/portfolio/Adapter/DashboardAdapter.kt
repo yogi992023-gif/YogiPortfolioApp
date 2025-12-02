@@ -26,8 +26,8 @@ class DashboardAdapter(
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val item = items[position]
 
-        holder.binding.menuIcon.setImageResource(item.iconRes)
-        holder.binding.menuTitle.text = item.title
+        holder.binding.menuIcon.setImageResource(item.menuIcon)
+        holder.binding.menuTitle.text = item.menuName
 
         holder.binding.root.setOnClickListener {
             onClick(item)

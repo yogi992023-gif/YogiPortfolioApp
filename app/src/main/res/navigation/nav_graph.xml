@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.DashboardFragment"
-        android:label="Home"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard">
 
         <action
@@ -44,6 +44,12 @@
         android:id="@+id/remoteIRFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.RemoteIRFragment"
         android:label="Remote"
+        tools:layout="@layout/fragment_location_track"/>
+
+    <fragment
+        android:id="@+id/menuAddFragment"
+        android:name="com.yogi.portfolio.portfolio.Fragment.MenuAddFragment"
+        android:label="Menu Add"
         tools:layout="@layout/fragment_location_track"/>
 
     <fragment

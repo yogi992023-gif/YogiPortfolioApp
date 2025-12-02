@@ -22,6 +22,12 @@ safe_args = "2.8.0"
 glide = "4.16.0"
 okhttp = "4.12.0"
 ui = "1.9.5"
+compose = "1.6.0"
+composeMaterial3 = "1.2.0"
+activityCompose = "1.9.0"
+
+compose-bom = "2024.06.00"
+material3 = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +60,12 @@ glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", versio
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 okhttp-core    = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "ui" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
 
 
 
@@ -65,3 +77,5 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safe_args" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+

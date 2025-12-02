@@ -16,7 +16,7 @@ class MenuViewModel@Inject constructor(private val repo: MenuRepository) : ViewM
 
     fun addMenu(title: String, iconRes: Int) {
         viewModelScope.launch {
-            repo.insertMenu(MenuEntity(title = title, iconRes = iconRes))
+            repo.insertMenu(MenuEntity(menuName = title, menuIcon = iconRes))
         }
     }
 }

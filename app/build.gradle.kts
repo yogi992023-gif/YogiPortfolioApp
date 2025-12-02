@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.safe.args)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -22,6 +23,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     buildTypes {
         release {
@@ -41,6 +43,9 @@ android {
     }
     kapt {
         correctErrorTypes = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.6.10"
     }
 }
 
@@ -78,5 +83,11 @@ dependencies {
 
     implementation(libs.okhttp.core)
     implementation(libs.okhttp.logging)
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.activity.compose)
 
 }

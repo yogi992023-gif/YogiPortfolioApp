@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.printerFragment,
                 R.id.settingsFragment,
                 R.id.locationTrackFragment,
-                R.id.remoteIRFragment),
+                R.id.remoteIRFragment,
+                R.id.menuAddFragment),
             binding.drawerLayout)
 
         // Connect Toolbar with NavController (shows hamburger icon)
@@ -79,6 +80,10 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_cart -> {
                 navController.navigate(R.id.cartFragment)
+                true
+            }
+            R.id.action_dashboard -> {
+                navController.navigate(R.id.dashboardFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -10,9 +10,11 @@ import javax.inject.Inject
 class MenuRepositoryImpl @Inject constructor(private val menuDao: MenuDao) : MenuRepository {
 
     override suspend fun insertMenu(item: MenuEntity) {
-        if(menuDao.getMenuCount() == 0){
+        /*if(menuDao.getMenuCount() == 0){
             menuDao.insertMenu(item)
-        }
+        }*/
+        menuDao.insertMenu(item)
+
     }
 
     override fun getMenuItems(): LiveData<List<MenuEntity>> {
