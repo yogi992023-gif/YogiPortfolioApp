@@ -9,10 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.FragmentDashboardBinding
 import com.yogi.portfolio.portfolio.Adapter.DashboardAdapter
+import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.ViewModel.MenuViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,6 +28,7 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: DashboardAdapter
     private val viewModel : MenuViewModel by viewModels()
+    private val cartViewModel : CartViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -44,6 +49,10 @@ class DashboardFragment : Fragment() {
                 viewModel.addMenu("Product List", R.drawable.ic_product_list)
             }
         }*/
+        MobileAds.initialize(requireContext())
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         adapter = DashboardAdapter(emptyList()) { menu ->
             Toast.makeText(requireContext(), menu.menuName, Toast.LENGTH_SHORT).show()
@@ -51,13 +60,10 @@ class DashboardFragment : Fragment() {
 
         }
 
-
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerView.adapter = adapter
 
         // observe live data from room
-
 
         viewModel.menus.observe(viewLifecycleOwner) { it ->
             adapter.updateData(it)

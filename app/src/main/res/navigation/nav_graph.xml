@@ -50,7 +50,12 @@
         android:id="@+id/menuAddFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.MenuAddFragment"
         android:label="Menu Add"
-        tools:layout="@layout/fragment_location_track"/>
+        tools:layout="@layout/fragment_menu_add">
+
+    <action
+        android:id="@+id/action_addmenu_to_dashboardFragment"
+        app:destination="@id/dashboardFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/productFragment"
@@ -67,7 +72,32 @@
         android:id="@+id/cartFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.CartFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+
+    <action
+        android:id="@+id/action_cartFragment_to_checkoutFragment"
+        app:destination="@id/checkoutFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.yogi.portfolio.portfolio.Fragment.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout" >
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_paymentFrgament"
+            app:destination="@id/paymentFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.yogi.portfolio.portfolio.Fragment.PaymentFragment"
+        android:label="Payment"
+        tools:layout="@layout/fragment_payment" />
 
 
     <fragment

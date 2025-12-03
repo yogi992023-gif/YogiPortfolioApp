@@ -1,0 +1,49 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Address section -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Delivery Address"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:text="Yogi MR, Chennai, Tamil Nadu, 600001"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Total section -->
+    <TextView
+        android:id="@+id/tvCheckoutTotal"
+        android:text="Total: ₹0.00"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Proceed button -->
+    <Button
+        android:id="@+id/btnProceedPayment"
+        android:text="Proceed to Payment"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

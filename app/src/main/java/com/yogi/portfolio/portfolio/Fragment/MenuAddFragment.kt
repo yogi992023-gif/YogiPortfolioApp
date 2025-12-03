@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.yogi.portfolio.databinding.FragmentMenuAddBinding
 import com.yogi.portfolio.portfolio.ViewModel.MenuViewModel
 import com.yogi.portfolio.portfolio.ui.composable.MenuInputScreen
@@ -32,13 +33,16 @@ class MenuAddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.composeInputContainer.setContent {
-            MenuInputScreen(
-                onSubmit = { title, iconRes ->
-                    Toast.makeText(requireContext(), "Saved: $title", Toast.LENGTH_LONG).show()
-                    menuViewModel.addMenu(title, iconRes)
 
-                }
-            )
+            binding.composeInputContainer.setContent {
+                MenuInputScreen(
+                    onSubmit = { title, iconRes ->
+                        Toast.makeText(requireContext(), "Saved: $title", Toast.LENGTH_LONG).show()
+                        menuViewModel.addMenu(title, iconRes)
+                        findNavController().navigate(com.yogi.portfolio.R.id.action_addmenu_to_dashboardFragment)
+                    }
+                )
+            }
         }
 
     }

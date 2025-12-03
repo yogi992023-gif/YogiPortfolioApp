@@ -84,7 +84,7 @@ class CartFragment : Fragment() {
     private fun checkoutAction() {
         binding.btnCheckout.setOnClickListener {
             Toast.makeText(requireContext(), "Proceeding to Checkout", Toast.LENGTH_SHORT).show()
-         //   findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment)
+            findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment)
         }
     }
 

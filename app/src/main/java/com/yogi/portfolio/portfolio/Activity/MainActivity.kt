@@ -5,7 +5,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,6 +21,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.ActivityMainBinding
+import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private val cartViewModel : CartViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +77,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_cart, menu)
+
+        val item = menu?.findItem(R.id.action_cart)
+        val actionView = item?.actionView
+        val badgeTextView = actionView?.findViewById<TextView>(R.id.tvBadge)
+
+        cartViewModel.cartItems.observe(this) { count ->
+            badgeTextView?.text = count.size.toString()
+            badgeTextView?.visibility = if (count.size > 0) View.VISIBLE else View.GONE
+        }
+
+        actionView?.setOnClickListener {
+            onOptionsItemSelected(item)
+        }
+
         return true
     }
 
