@@ -4,13 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.ItemProductBinding
+import com.yogi.portfolio.portfolio.ViewModel.WishlistViewModel
 import com.yogi.portfolio.portfolio.data.API.RoomEntity.CartEntity
 import com.yogi.portfolio.portfolio.data.API.RoomEntity.ProductEntity
 
-class ProductAdapter(
-    private val items: MutableList<ProductEntity>, private val onItemClick : (ProductEntity) -> Unit,
-    var onAddCartClick: (CartEntity) -> Unit) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(private val wishlistViewModel: WishlistViewModel,
+                     private val items: MutableList<ProductEntity>, private val onItemClick : (ProductEntity) -> Unit,
+                     var onAddCartClick: (CartEntity) -> Unit) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -44,6 +46,18 @@ class ProductAdapter(
                     image = item.image,
                     quantity = 1)
                 onAddCartClick(cart)
+            }
+
+            val isWishlisted = wishlistViewModel.isWishlisted(item.id)
+
+            holder.binding.imgWishlist.setImageResource(
+                if (isWishlisted) R.drawable.ic_heart_filled
+                else R.drawable.ic_heart_outline
+            )
+
+            holder.binding.imgWishlist.setOnClickListener {
+                wishlistViewModel.toggleWishlist(item)
+                notifyItemChanged(position)
             }
         }
 

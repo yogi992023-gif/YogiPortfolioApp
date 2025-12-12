@@ -71,7 +71,7 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.CartFragment"
-        android:label="Home"
+        android:label="Cart"
         tools:layout="@layout/fragment_cart">
 
     <action
@@ -97,7 +97,13 @@
         android:id="@+id/paymentFragment"
         android:name="com.yogi.portfolio.portfolio.Fragment.PaymentFragment"
         android:label="Payment"
-        tools:layout="@layout/fragment_payment" />
+        tools:layout="@layout/fragment_payment">
+
+        <action
+            android:id="@+id/action_paymentFrgament_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
+
+    </fragment>
 
 
     <fragment
@@ -109,8 +115,13 @@
         android:name="productId"
         app:argType="integer" />
 
-
     </fragment>
+
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.yogi.portfolio.portfolio.Fragment.WishlistFragment"
+        android:label="Wishlist"
+        tools:layout="@layout/fragment_wishlist"/>
 
 
 

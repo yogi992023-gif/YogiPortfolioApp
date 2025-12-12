@@ -21,6 +21,7 @@ import com.yogi.portfolio.portfolio.Adapter.ProductAdapter
 import com.yogi.portfolio.portfolio.Utils.Resource.ApiResult
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.ViewModel.ProductViewModel
+import com.yogi.portfolio.portfolio.ViewModel.WishlistViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.getValue
@@ -32,6 +33,7 @@ class ProductFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ProductViewModel by viewModels()
     private val viewModelCart : CartViewModel by viewModels()
+    val wishListViewModel : WishlistViewModel by viewModels()
     private lateinit var adapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,7 @@ class ProductFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding =  FragmentProductBinding.inflate(inflater, container, false)
 
-        adapter = ProductAdapter(mutableListOf(), { product ->
+        adapter = ProductAdapter(wishListViewModel,mutableListOf(), { product ->
             val action = ProductFragmentDirections.actionProductFragmentToProductDetailsFragment(product.id)
             findNavController().navigate(action)
 

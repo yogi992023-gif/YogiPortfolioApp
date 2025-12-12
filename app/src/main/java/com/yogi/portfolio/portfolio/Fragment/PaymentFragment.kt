@@ -45,7 +45,7 @@ class PaymentFragment : Fragment() {
                 return@setOnClickListener
             }
 
-         //   findNavController().navigate(R.id.action_paymentFragment_to_orderSuccessFragment)
+            findNavController().navigate(R.id.action_paymentFrgament_to_wishlistFragment)
         }
 
         return binding.root

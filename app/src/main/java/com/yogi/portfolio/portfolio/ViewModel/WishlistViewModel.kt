@@ -35,4 +35,8 @@ class WishlistViewModel @Inject constructor(
             }
         }
     }
+
+    fun isWishlisted(productId: Int): Boolean {
+        return wishlist.value.any { it.id == productId }
+    }
 }
