@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,10 +36,9 @@ fun MenuInputScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp),
+            .padding(20.dp)
     ) {
 
-        // Title input
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
@@ -50,19 +48,15 @@ fun MenuInputScreen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Drawable input with icon preview
         OutlinedTextField(
             value = iconText,
             onValueChange = {
                 iconText = it
-
-                // Try to get drawable resource ID dynamically
                 val resId = context.resources.getIdentifier(
                     iconText,
                     "drawable",
                     context.packageName
                 )
-
                 iconRes = if (resId != 0) resId else null
             },
             label = { Text("Icon Resource Name") },
@@ -82,9 +76,7 @@ fun MenuInputScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = {
-                onSubmit(title, iconRes ?: 0)
-            },
+            onClick = { onSubmit(title, iconRes ?: 0) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Submit")
@@ -92,6 +84,10 @@ fun MenuInputScreen(
     }
 }
 
-/*private fun getDrawableId(name: String): Int {
-    return resources.getIdentifier(name, "drawable", requireContext().packageName)
-}*/
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun MenuInputScreenPreview() {
+    MenuInputScreen(
+        onSubmit = { _, _ -> }
+    )
+}

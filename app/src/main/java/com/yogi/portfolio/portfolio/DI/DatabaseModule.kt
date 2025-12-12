@@ -31,4 +31,6 @@ object DatabaseModule {
     fun provideCartDao(db: AppDatabase) = db.cartDao()
     @Provides
     fun provideMenuDao(db: AppDatabase) = db.menuDao()
+    @Provides
+    fun provideWishListDao(db: AppDatabase) = db.wishListDao()
 }
