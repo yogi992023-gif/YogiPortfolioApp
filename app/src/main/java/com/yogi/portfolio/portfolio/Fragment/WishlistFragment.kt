@@ -6,20 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.ui.tooling.preview.AndroidUiMode
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yogi.portfolio.databinding.FragmentWishlistBinding
 import com.yogi.portfolio.portfolio.Adapter.WishlistAdapter
+import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.ViewModel.WishlistViewModel
+import com.yogi.portfolio.portfolio.data.API.RoomEntity.CartEntity
 import com.yogi.portfolio.portfolio.data.API.RoomEntity.ProductEntity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WishlistFragment : Fragment() {
 
     private val viewModel : WishlistViewModel by viewModels()
+    private val cartVoewModel : CartViewModel by viewModels()
     private lateinit var adapter: WishlistAdapter
 
     private var _binding: FragmentWishlistBinding? = null
@@ -44,7 +49,7 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = WishlistAdapter { item ->
+        adapter = WishlistAdapter( { item ->
             viewModel.toggleWishlist(
                 ProductEntity(
                     id = item.id,
@@ -56,7 +61,21 @@ class WishlistFragment : Fragment() {
                     category = ""
                 )
             )
-        }
+        },
+        moveToCart = { it ->
+            val item = CartEntity(
+                productId = it.id,
+                title = it.title,
+                price = it.price,
+                image = it.image
+            )
+            if(cartVoewModel.cartItems.value?.any{ item.productId == it.productId } == true){
+                Toast.makeText(requireContext(),"Product same at cart list... ", Toast.LENGTH_SHORT).show()
+            }else{
+                cartVoewModel.addItem(item)
+                viewModel.removeItem(it)
+            }
+        })
 
 
         binding.rvWishlist.layoutManager = LinearLayoutManager(requireContext())
@@ -68,6 +87,12 @@ class WishlistFragment : Fragment() {
                 adapter.submitList(list)
                 binding.tvEmptyWishlist.visibility =
                     if (list.isEmpty()) View.VISIBLE else View.GONE
+            }
+        }
+
+        binding.btnClearWishlist.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.clearWishlist()
             }
         }
     }

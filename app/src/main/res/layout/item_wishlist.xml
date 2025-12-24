@@ -39,13 +39,22 @@
                 android:id="@+id/tvPrice"
                 android:textSize="14sp"
                 android:textColor="#388E3C"/>
+            <Button
+                android:id="@+id/btnMoveToCart"
+                android:text="Cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imgRemove"
-            android:src="@drawable/ic_delete"
             android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_height="24dp"
+            android:layout_gravity=""
+            android:src="@drawable/ic_delete" />
+
+
 
     </LinearLayout>
 

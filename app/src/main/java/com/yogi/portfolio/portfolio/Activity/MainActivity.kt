@@ -13,6 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,7 +27,11 @@ import com.google.android.material.navigation.NavigationView
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.ActivityMainBinding
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
+import com.yogi.portfolio.portfolio.ViewModel.WishlistBadgeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
+import kotlin.getValue
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val cartViewModel : CartViewModel by viewModels()
+
+    private val wishlistBadgeVM: WishlistBadgeViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,6 +98,21 @@ class MainActivity : AppCompatActivity() {
             badgeTextView?.visibility = if (count.size > 0) View.VISIBLE else View.GONE
         }
 
+        val item1 = menu?.findItem(R.id.action_wishlist)
+        val actionView1 = item1?.actionView
+        val badgeWishList = actionView1?.findViewById<TextView>(R.id.tvBadge_wish_list)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                wishlistBadgeVM.wishlistCount.collect { count ->
+                    badgeWishList?.text = count.toString()
+                    badgeWishList?.visibility =
+                        if (count > 0) View.VISIBLE else View.GONE
+                }
+            }
+        }
+
+
         actionView?.setOnClickListener {
             onOptionsItemSelected(item)
         }
@@ -102,6 +128,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_dashboard -> {
                 navController.navigate(R.id.dashboardFragment)
+                true
+            }
+            R.id.action_wishlist -> {
+                navController.navigate(R.id.wishlistFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

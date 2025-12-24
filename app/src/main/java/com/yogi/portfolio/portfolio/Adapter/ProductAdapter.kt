@@ -59,8 +59,18 @@ class ProductAdapter(private val wishlistViewModel: WishlistViewModel,
                 wishlistViewModel.toggleWishlist(item)
                 notifyItemChanged(position)
             }
-        }
 
+            holder.binding.imgWishlist.animate()
+                .scaleX(1.2f)
+                .scaleY(1.2f)
+                .setDuration(150)
+                .withEndAction {
+                    holder.binding.imgWishlist.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .duration = 150
+                }
+        }
     }
 
     override fun getItemCount() = items.size

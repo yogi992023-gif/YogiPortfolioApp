@@ -36,7 +36,19 @@ class WishlistViewModel @Inject constructor(
         }
     }
 
+    fun removeItem(item: WishlistEntity) {
+        viewModelScope.launch {
+            repo.remove(item)
+        }
+    }
+
     fun isWishlisted(productId: Int): Boolean {
         return wishlist.value.any { it.id == productId }
+    }
+
+    fun clearWishlist() {
+        viewModelScope.launch {
+            repo.clear()
+        }
     }
 }

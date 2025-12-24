@@ -15,4 +15,11 @@
         app:showAsAction="always"
         app:actionLayout="@layout/cart_badge_layout"/>
 
+    <item
+        android:id="@+id/action_wishlist"
+        android:icon="@drawable/ic_wish_list"
+        android:title="Wish List"
+        app:actionLayout="@layout/wish_list_layout_badge"
+        app:showAsAction="always"/>
+
 </menu>

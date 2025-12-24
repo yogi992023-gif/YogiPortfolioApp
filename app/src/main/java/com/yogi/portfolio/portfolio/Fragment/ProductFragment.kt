@@ -49,8 +49,7 @@ class ProductFragment : Fragment() {
             val action = ProductFragmentDirections.actionProductFragmentToProductDetailsFragment(product.id)
             findNavController().navigate(action)
 
-        },onAddCartClick = { cart ->
-                viewModelCart.addItem(cart)
+        },onAddCartClick = { cart -> viewModelCart.addItem(cart)
             Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_SHORT).show()
         }
         )

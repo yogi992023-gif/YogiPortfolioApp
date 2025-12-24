@@ -10,7 +10,8 @@ import com.yogi.portfolio.databinding.ItemWishlistBinding
 import com.yogi.portfolio.portfolio.data.API.RoomEntity.WishlistEntity
 
 class WishlistAdapter(
-    private val onRemoveClick: (WishlistEntity) -> Unit
+    private val onRemoveClick: (WishlistEntity) -> Unit,
+    private val moveToCart : (WishlistEntity) -> Unit
 ) : ListAdapter<WishlistEntity, WishlistAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder(val binding: ItemWishlistBinding) :
@@ -43,6 +44,9 @@ class WishlistAdapter(
 
         holder.binding.imgRemove.setOnClickListener {
             onRemoveClick(item)
+        }
+        holder.binding.btnMoveToCart.setOnClickListener {
+            moveToCart(item)
         }
     }
 }

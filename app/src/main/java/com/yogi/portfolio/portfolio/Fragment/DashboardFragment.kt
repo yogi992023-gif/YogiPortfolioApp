@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.yogi.portfolio.databinding.FragmentDashboardBinding
 import com.yogi.portfolio.portfolio.Adapter.DashboardAdapter
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.ViewModel.MenuViewModel
+import com.yogi.portfolio.portfolio.ViewModel.WishlistBadgeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.getValue
@@ -33,10 +35,6 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         _binding = FragmentDashboardBinding.inflate(inflater,container,false)
-
-        // insert sample menu
-        /*viewModel.addMenu("Profile", R.drawable.ic_profile)
-        viewModel.addMenu("Settings", R.drawable.ic_settings)*/
 
         return binding.root
     }
