@@ -62,18 +62,18 @@ class WishlistFragment : Fragment() {
                 )
             )
         },
-        moveToCart = { it ->
+        moveToCart = { wishIt ->
             val item = CartEntity(
-                productId = it.id,
-                title = it.title,
-                price = it.price,
-                image = it.image
+                productId = wishIt.id,
+                title = wishIt.title,
+                price = wishIt.price,
+                image = wishIt.image
             )
-            if(cartVoewModel.cartItems.value?.any{ item.productId == it.productId } == true){
+            if(cartVoewModel.cartItems.value?.any{ it.productId == wishIt.id } == true){
                 Toast.makeText(requireContext(),"Product same at cart list... ", Toast.LENGTH_SHORT).show()
             }else{
                 cartVoewModel.addItem(item)
-                viewModel.removeItem(it)
+                viewModel.removeItem(wishIt)
             }
         })
 

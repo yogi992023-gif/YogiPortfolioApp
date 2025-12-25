@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253597071046",
+    "project_id": "com-yogi-portfolio",
+    "storage_bucket": "com-yogi-portfolio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253597071046:android:3372f6c4bf59bb273c49c7",
+        "android_client_info": {
+          "package_name": "com.yogi.portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd_CeayxuIjuCozxIQni4UNbG-jaEl70A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

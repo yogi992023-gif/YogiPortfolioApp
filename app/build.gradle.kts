@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.safe.args)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -91,6 +92,8 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.activity.compose)
     implementation(libs.playservices.ads)
-
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.analytics)
 
 }
