@@ -2,13 +2,16 @@ package com.yogi.portfolio.portfolio.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
+import com.google.firebase.logger.Logger
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.ActivityLoginBinding
 import com.yogi.portfolio.portfolio.ViewModel.AuthViewModel
@@ -32,19 +35,21 @@ class LoginActivity : AppCompatActivity() {
             onLoginClick = { email, password ->
                 viewModel.login(email,password)
             },
-            onRegisterClick = {
+            onRegisterClick = {email, password ->
                 Toast.makeText(this,"Sign up clicked...", Toast.LENGTH_SHORT).show()
+                viewModel.register(email,password)
                 // navigate to Register screen
             }
             )
         }
-        viewModel.authState.observe(this) { result ->
-            result.onSuccess {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }.onFailure {
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-            }
+            viewModel.authState.observe(this) { result ->
+                Log.e("Register login",result.toString())
+                result.onSuccess {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }.onFailure {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
         }
 
         /*binding.btnLogout.setOnClickListener {

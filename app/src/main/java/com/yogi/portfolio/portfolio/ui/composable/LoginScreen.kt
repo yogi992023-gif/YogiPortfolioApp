@@ -40,7 +40,7 @@ import androidx.compose.ui.draw.clip
 @Composable
 fun LoginScreen(
     onLoginClick: (String, String) -> Unit,
-    onRegisterClick :() -> Unit
+    onRegisterClick :(String, String) -> Unit
 ) {
     var emailOrPhone by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -168,7 +168,7 @@ fun LoginScreen(
                         .clickable {
                         // 👉 OnClick action here
                         Log.d("CLICK", "Register clicked")
-                            onRegisterClick()
+                            onRegisterClick(emailOrPhone,password)
                     }
                 )
             }
@@ -182,7 +182,7 @@ fun LoginScreenPreview() {
     MaterialTheme {
         LoginScreen(
             onLoginClick = { _, _ -> },
-            onRegisterClick = { }
+            onRegisterClick = {_, _ -> }
         )
     }
 }
