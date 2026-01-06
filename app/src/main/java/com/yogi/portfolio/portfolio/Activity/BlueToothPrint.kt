@@ -20,6 +20,7 @@ import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.yogi.portfolio.databinding.ActivityBlueToothPrintBinding
 import java.io.IOException
 import java.util.UUID
@@ -44,6 +45,8 @@ class BlueToothPrint : AppCompatActivity() {
         checkBluetoothPermissions()
 
         binding.btnSelectPrinter.setOnClickListener {
+            FirebaseCrashlytics.getInstance().log("Test crash")
+            FirebaseCrashlytics.getInstance().recordException(Exception("Test exception"))
             showPairedPrintersDialog()
         }
 
