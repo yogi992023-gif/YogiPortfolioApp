@@ -76,7 +76,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.settingsFragment,
                 R.id.locationTrackFragment,
                 R.id.remoteIRFragment,
-                R.id.menuAddFragment),
+                R.id.menuAddFragment,
+                R.id.networkFragment),
             binding.drawerLayout)
 
         // Connect Toolbar with NavController (shows hamburger icon)

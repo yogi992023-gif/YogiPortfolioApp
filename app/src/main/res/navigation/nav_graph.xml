@@ -51,7 +51,15 @@
         android:name="com.yogi.portfolio.portfolio.Fragment.MenuAddFragment"
         android:label="Menu Add"
         tools:layout="@layout/fragment_menu_add">
-
+        <action
+            android:id="@+id/action_addmenu_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/networkFragment"
+        android:name="com.yogi.portfolio.portfolio.Fragment.NetworkFragment"
+        android:label="Network Node"
+        tools:layout="@layout/fragment_network">
     <action
         android:id="@+id/action_addmenu_to_dashboardFragment"
         app:destination="@id/dashboardFragment" />

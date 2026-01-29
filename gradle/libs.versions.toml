@@ -29,7 +29,6 @@ playservicesAds = "23.1.0"
 compose-bom = "2024.06.00"
 material3 = "1.2.1"
 uiTooling = "1.10.0"
-
 firebase-bom = "33.1.2"
 google-services = "4.4.0"
 crash = "2.9.9"
@@ -76,6 +75,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx", version.ref = "crash" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
 
 

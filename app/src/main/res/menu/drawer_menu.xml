@@ -8,5 +8,6 @@
         <item android:id="@+id/locationTrackFragment" android:title="Location" android:icon="@drawable/ic_location" />
         <item android:id="@+id/remoteIRFragment" android:title="Remote" android:icon="@drawable/ic_remote" />
         <item android:id="@+id/menuAddFragment" android:title="Menu Add" android:icon="@drawable/ic_menu" />
+        <item android:id="@+id/networkFragment" android:title="Network Node" android:icon="@drawable/ic_network_node" />
     </group>
 </menu>

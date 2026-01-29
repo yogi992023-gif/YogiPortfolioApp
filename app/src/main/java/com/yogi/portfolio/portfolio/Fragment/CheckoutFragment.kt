@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.FragmentCheckoutBinding
+import com.yogi.portfolio.portfolio.Service.MyFirebaseService
+import com.yogi.portfolio.portfolio.Utils.CommonNotification
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
@@ -41,6 +43,12 @@ class CheckoutFragment : Fragment() {
         }
 
         binding.btnProceedPayment.setOnClickListener {
+            CommonNotification.show(
+                requireContext(),
+                "Info",
+                "Profile updated"
+            )
+
             findNavController().navigate(R.id.action_checkoutFragment_to_paymentFrgament)
         }
     }
