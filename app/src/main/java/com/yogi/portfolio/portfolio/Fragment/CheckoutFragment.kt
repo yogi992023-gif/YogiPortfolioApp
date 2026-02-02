@@ -1,12 +1,14 @@
 package com.yogi.portfolio.portfolio.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.FragmentCheckoutBinding
 import com.yogi.portfolio.portfolio.Service.MyFirebaseService
@@ -43,6 +45,17 @@ class CheckoutFragment : Fragment() {
         }
 
         binding.btnProceedPayment.setOnClickListener {
+            FirebaseMessaging.getInstance().token
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.e("FCM_TOKEN", "Fetching token failed", task.exception)
+                        return@addOnCompleteListener
+                    }
+
+                    val token = task.result
+                    Log.d("FCM_TOKEN", token)
+                }
+
             CommonNotification.show(
                 requireContext(),
                 "Info",

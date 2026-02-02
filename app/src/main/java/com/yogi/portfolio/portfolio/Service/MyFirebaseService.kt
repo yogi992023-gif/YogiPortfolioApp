@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -22,6 +23,7 @@ class MyFirebaseService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        Log.d("FCM_TOKEN_FB", token)
         // Send token to your server
     }
 
@@ -43,7 +45,7 @@ class MyFirebaseService : FirebaseMessagingService() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.ic_app_foreground)
+            .setSmallIcon(R.mipmap.ic_app)
             .setContentTitle(title)
             .setContentText(message)
             .setAutoCancel(true)

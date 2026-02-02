@@ -3,6 +3,7 @@ package com.yogi.portfolio.portfolio.Utils
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.yogi.portfolio.R
@@ -14,6 +15,11 @@ object CommonNotification {
 
     fun show(context: Context, title: String, message: String, notificationId: Int = System.currentTimeMillis().toInt()
     ) {
+
+        val largeIcon = BitmapFactory.decodeResource(
+            context.resources,
+            R.mipmap.ic_notification // use launcher icon for test
+        )
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
