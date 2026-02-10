@@ -1,40 +1,114 @@
-# 📱 YogiPortfolioApp
+🚀 Features
 
-A modern Android application built using **Kotlin**, **MVVM architecture**, **Coroutines**, **Flow**, and **Jetpack Components**.  
-This project demonstrates clean architecture, modular code, and scalable project structure.
+🔐 Login & Authentication
 
----
+🧭 Jetpack Navigation Component
 
-## 🚀 Features
+🧩 MVVM pattern (ViewModel + LiveData / StateFlow)
 
-- 🔐 Login & Authentication  
-- 🧭 Jetpack Navigation Component  
-- 🧩 MVVM pattern (ViewModel + LiveData/StateFlow)  
-- 🌐 Retrofit API integration  
-- 💉 Hilt Dependency Injection  
-- 🗄 Room Local Database  
-- 🎨 Material UI design  
-- 📦 Modular & Clean codebase  
-- 📱 Fully responsive UI
+🌐 Retrofit API integration
 
----
+💉 Hilt Dependency Injection
 
-## 🛠 Tech Stack
+🗄 Room Local Database
 
-**Language:** Kotlin  
-**Architecture:** MVVM + Clean Architecture  
-**Libraries:**
-- Retrofit + OkHttp
-- Kotlin Coroutines
-- Hilt (DI)
-- Room Database
-- ViewBinding / DataBinding
-- Glide / Coil (Image loading)
-- LiveData / Flow
-- Material Components
+🔔 Push Notification (Firebase Cloud Messaging - FCM)
 
----
+📊 Firebase Analytics (User tracking & events)
 
-## 📸 Screenshots
+🎨 Material UI design
 
-> Under Development
+📦 Modular & Clean codebase
+
+📱 Fully responsive UI
+
+🔥 Firebase Integration
+
+This app is integrated with Firebase for real-time monitoring, analytics, and user engagement.
+
+📊 Firebase Analytics → Track user behavior, login, screen usage, events
+
+🔔 Firebase Cloud Messaging (FCM) → Push notifications & token management
+
+💥 Firebase Crashlytics (optional if you use) → Real-time crash monitoring
+
+👤 User tracking with custom events & properties
+
+🛠 Tech Stack
+
+Language: Kotlin
+Architecture: MVVM + Clean Architecture
+
+Libraries & Tools
+
+Retrofit + OkHttp (Networking)
+
+Kotlin Coroutines & Flow (Async / Reactive)
+
+Hilt (Dependency Injection)
+
+Room Database (Local storage)
+
+Firebase Analytics
+
+Firebase Cloud Messaging (FCM)
+
+ViewBinding / DataBinding
+
+Glide / Coil (Image loading)
+
+LiveData / StateFlow
+
+Material Components
+
+Navigation Component
+
+📊 Analytics Events Tracked
+
+User Login / Logout
+
+Screen Views
+
+Button Click Events
+
+API Success / Failure (optional)
+
+Notification received / opened
+
+🔔 Push Notification Features
+
+FCM Token generation & refresh
+
+Topic / User based notifications
+
+Foreground & background handling
+
+Notification click navigation
+
+📸 Screenshots
+
+(Add your app screenshots here)
+
+🧱 Project Architecture
+Presentation (UI)
+   ↓
+ViewModel (State / Logic)
+   ↓
+UseCase / Repository
+   ↓
+Data स्रोत (API + Room DB + Firebase)
+
+⚙️ Setup Instructions
+
+Clone the repo
+
+Add your google-services.json (Firebase) inside app/
+
+Sync Gradle
+
+Run the project
+
+👨‍💻 Author
+
+Yogeshwaran
+Android Developer | Kotlin | MVVM | Firebase | Clean Architecture
