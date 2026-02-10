@@ -16,18 +16,31 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.yogi.portfolio.databinding.ActivityBlueToothPrintBinding
+import com.yogi.portfolio.portfolio.Adapter.CartAdapter
+import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.UUID
+import kotlin.getValue
+import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class BlueToothPrint : AppCompatActivity() {
 
     lateinit var binding : ActivityBlueToothPrintBinding
+
+    private lateinit var cartAdapter : CartAdapter
+
+    private val cartViewModel : CartViewModel by viewModels()
 
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var selectedDevice: BluetoothDevice? = null
@@ -43,6 +56,9 @@ class BlueToothPrint : AppCompatActivity() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
         checkBluetoothPermissions()
+        observeCart()
+        setupRecyclerView()
+
 
         binding.btnSelectPrinter.setOnClickListener {
             FirebaseCrashlytics.getInstance().log("Test crash")
@@ -67,7 +83,7 @@ class BlueToothPrint : AppCompatActivity() {
                     
                 """.trimIndent()
 
-                val bitmap = getBitmapFromView(binding.blueToothLayout)
+                val bitmap = getBitmapFromView(binding.rvPrintList)
                 val printData = convertBitmapToPrinterBytes(bitmap)
 
                 printToBluetoothPrinterLayout(selectedDevice!!, printData)
@@ -78,6 +94,43 @@ class BlueToothPrint : AppCompatActivity() {
             }
         }
     }
+
+    private fun setupRecyclerView() {
+        cartAdapter = CartAdapter(
+            onPlusClick = { id ->
+                cartViewModel.increaseQty(id)
+            },
+            onMinusClick = {
+                    id -> cartViewModel.decreaseQty(id)
+            },
+            onDeleteClick = {
+                    id -> cartViewModel.removeItem(id)
+            }
+        )
+
+        binding.rvPrintList.apply {
+            layoutManager = LinearLayoutManager(this@BlueToothPrint)
+            adapter = cartAdapter
+        }
+    }
+
+    private fun observeCart() {
+        cartViewModel.cartItems.observe(this) { list ->
+            Log.e("Cart Fragment" ,  list.toString())
+            if (list.isEmpty()) {
+                binding.rvPrintList.visibility = View.GONE
+            } else {
+                binding.rvPrintList.visibility = View.VISIBLE
+            }
+
+            cartAdapter.submitList(list)
+
+        /*    // Total calculation
+            val total = list.sumOf { it.price * it.quantity }
+            binding.tvTotalAmount.text = "Total : ₹ ${total.roundToInt()}"*/
+        }
+    }
+
 
 
 

@@ -82,6 +82,10 @@
         android:label="Cart"
         tools:layout="@layout/fragment_cart">
 
+        <action
+            android:id="@+id/action_cartFragment_to_wishlistFrgament"
+            app:destination="@id/wishlistFragment" />
+
     <action
         android:id="@+id/action_cartFragment_to_checkoutFragment"
         app:destination="@id/checkoutFragment" />
@@ -130,6 +134,10 @@
         android:name="com.yogi.portfolio.portfolio.Fragment.WishlistFragment"
         android:label="Wishlist"
         tools:layout="@layout/fragment_wishlist"/>
+
+    <action
+        android:id="@+id/action_wishlistFrgament_to_checkoutFragment"
+        app:destination="@id/checkoutFragment" />
 
 
 

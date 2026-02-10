@@ -1,5 +1,6 @@
 package com.yogi.portfolio.portfolio.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,8 +11,11 @@ import android.widget.Toast
 import androidx.compose.ui.tooling.preview.AndroidUiMode
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.yogi.portfolio.R
 import com.yogi.portfolio.databinding.FragmentWishlistBinding
+import com.yogi.portfolio.portfolio.Activity.BlueToothPrint
 import com.yogi.portfolio.portfolio.Adapter.WishlistAdapter
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
 import com.yogi.portfolio.portfolio.ViewModel.WishlistViewModel
@@ -26,10 +30,8 @@ class WishlistFragment : Fragment() {
     private val viewModel : WishlistViewModel by viewModels()
     private val cartVoewModel : CartViewModel by viewModels()
     private lateinit var adapter: WishlistAdapter
-
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +97,10 @@ class WishlistFragment : Fragment() {
                 viewModel.clearWishlist()
             }
         }
+
+        binding.btnCheckout.setOnClickListener {
+            startActivity(Intent(requireContext(), BlueToothPrint::class.java))
+         //   findNavController().navigate(R.id.action_wishlistFrgament_to_checkoutFragment)
+        }
     }
-
-
 }

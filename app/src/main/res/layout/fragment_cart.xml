@@ -53,7 +53,7 @@
         android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Checkout"
+        android:text="WishList"
         android:layout_margin="16dp"/>
 
 </LinearLayout>
