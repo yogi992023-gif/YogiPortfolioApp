@@ -35,16 +35,18 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.ui.draw.clip
 
 @Composable
 fun LoginScreen(
     onLoginClick: (String, String) -> Unit,
-    onRegisterClick :(String, String) -> Unit
+    onRegisterClick :(String, String, String) -> Unit
 ) {
     var emailOrPhone by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var name by remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -72,6 +74,15 @@ fun LoginScreen(
             )
 
             Spacer(modifier = Modifier.height(32.dp))
+            //User Name
+            TextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Enter Name") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Email / Phone
             OutlinedTextField(
@@ -168,7 +179,7 @@ fun LoginScreen(
                         .clickable {
                         // 👉 OnClick action here
                         Log.d("CLICK", "Register clicked")
-                            onRegisterClick(emailOrPhone,password)
+                            onRegisterClick(emailOrPhone,password, name)
                     }
                 )
             }
@@ -182,7 +193,7 @@ fun LoginScreenPreview() {
     MaterialTheme {
         LoginScreen(
             onLoginClick = { _, _ -> },
-            onRegisterClick = {_, _ -> }
+            onRegisterClick = {_, _, _ -> }
         )
     }
 }

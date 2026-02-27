@@ -27,6 +27,10 @@ class CartRepositoryImpl @Inject constructor(private val cartDao: CartDao) : Car
         cartDao.decreaseQuantity(productId)
     }
 
+    override suspend fun clearCart() {
+        cartDao.clearCart()
+    }
+
     suspend fun plus(id: Int) = cartDao.increaseQuantity(id)
     suspend fun minus(id: Int) = cartDao.decreaseQuantity(id)
 }

@@ -23,10 +23,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        buildConfigField(
+            "String",
+            "GEMINI_API_KEY",
+            "\"${properties.get("GEMINI_API_KEY")}\""
+        )
     }
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     buildTypes {
         release {
@@ -64,6 +72,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.play.services.location)
     implementation(libs.androidx.ui)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.foundation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,6 +86,7 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
     implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.livedata)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
@@ -99,5 +110,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.messaging)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.database.ktx)
 
 }

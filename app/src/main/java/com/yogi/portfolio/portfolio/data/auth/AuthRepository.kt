@@ -1,6 +1,7 @@
 package com.yogi.portfolio.portfolio.data.auth
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -10,6 +11,7 @@ class AuthRepository @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) {
 
+    val database = FirebaseDatabase.getInstance().reference
     fun isUserLoggedIn(): Boolean =
         firebaseAuth.currentUser != null
 

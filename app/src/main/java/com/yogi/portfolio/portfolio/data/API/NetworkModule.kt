@@ -39,9 +39,20 @@ object NetworkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
-            .client(okHttpClient)   // ✅ FIXED HERE
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGeminiApi(okHttpClient: OkHttpClient): GeminiApi {
+        return Retrofit.Builder()
+            .baseUrl("https://generativelanguage.googleapis.com/")
+            .client(okHttpClient) // Add this to see logs
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GeminiApi::class.java)
     }
 
     @Provides

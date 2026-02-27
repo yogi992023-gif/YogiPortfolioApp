@@ -38,4 +38,11 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
             repository.decreaseQuantity(id)
         }
     }
+
+    fun clearCart() {
+        viewModelScope.launch {
+            repository.clearCart()
+        }
+    }
+
 }

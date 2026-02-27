@@ -1,5 +1,6 @@
 package com.yogi.portfolio.portfolio.Activity
 
+import ChatViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.semantics.text
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: AuthViewModel by viewModels()
+    private val chatViewModel : ChatViewModel by viewModels()
+    var chatName: String = ""
+    var chatEmail: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +41,10 @@ class LoginActivity : AppCompatActivity() {
             onLoginClick = { email, password ->
                 viewModel.login(email,password)
             },
-            onRegisterClick = {email, password ->
+            onRegisterClick = {email, password, name ->
                 Toast.makeText(this,"Sign up clicked...", Toast.LENGTH_SHORT).show()
+                chatName = name
+                chatEmail = email
                 viewModel.register(email,password)
                 // navigate to Register screen
             }
@@ -45,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.authState.observe(this) { result ->
                 Log.e("Register login",result.toString())
                 result.onSuccess {
+                    chatViewModel.createChatUser(chatName, chatEmail)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }.onFailure {

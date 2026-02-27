@@ -27,6 +27,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.yogi.portfolio.databinding.ActivityBlueToothPrintBinding
 import com.yogi.portfolio.portfolio.Adapter.CartAdapter
 import com.yogi.portfolio.portfolio.ViewModel.CartViewModel
+import com.yogi.portfolio.portfolio.data.API.RoomEntity.CartEntity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.UUID
@@ -45,6 +46,8 @@ class BlueToothPrint : AppCompatActivity() {
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var selectedDevice: BluetoothDevice? = null
     private val sppUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    private var cartList = mutableListOf<CartEntity>()
+
 
 
     @SuppressLint("MissingPermission")
@@ -70,25 +73,39 @@ class BlueToothPrint : AppCompatActivity() {
 
         binding.btn.setOnClickListener {
             if (selectedDevice != null) {
-                val billData = """
-                    *** TEST PRINT ***
-                    Printer: ${selectedDevice!!.name}
-                    -----------------------------
-                    Customer: Raj Kumar
-                    Amount: ₹450
-                    Date: 07-Oct-2025
-                    
-                    Thank you for visiting!
-                    -----------------------------
-                    
-                """.trimIndent()
 
+                val sb = StringBuilder()
+                sb.append("----------- YOGI Mart ----------\n")
+                sb.append("--------------------------------\n")
+                sb.append(String.format("%-16s %4s %10s", "Item", "Qty", "Price")).append("\n")
+                sb.append("--------------------------------\n")
+
+                var totalAmount = 0.0
+                for (item in cartList) {
+                    val name = if (item.title.length > 16) item.title.substring(0, 13) + "..." else item.title
+                    val itemTotal = item.price * item.quantity
+                    sb.append(String.format("%-16s %4d %10.2f", name, item.quantity, itemTotal)).append("\n")
+                    totalAmount += itemTotal
+                }
+
+                sb.append("--------------------------------\n")
+                sb.append(String.format("%-16s %4s %10.2f", "TOTAL", "", totalAmount)).append("\n")
+                sb.append("--------------------------------\n")
+                sb.append("\n   Thank you for visiting!\n\n")
+
+                val billData = sb.toString()
+
+                // Option 1: Print as Text (Recommended for clear receipts)
+
+                cartViewModel.clearCart()
+                printToBluetoothPrinter(selectedDevice!!, billData)
+
+                // Option 2: Print as Layout/Bitmap (Optional)
+                /*
                 val bitmap = getBitmapFromView(binding.rvPrintList)
                 val printData = convertBitmapToPrinterBytes(bitmap)
-
                 printToBluetoothPrinterLayout(selectedDevice!!, printData)
-
-             //   printToBluetoothPrinter(selectedDevice!!, billData)
+                */
             } else {
                 Toast.makeText(this, "Please select a printer first", Toast.LENGTH_SHORT).show()
             }
@@ -116,7 +133,9 @@ class BlueToothPrint : AppCompatActivity() {
 
     private fun observeCart() {
         cartViewModel.cartItems.observe(this) { list ->
-            Log.e("Cart Fragment" ,  list.toString())
+            cartList.clear()
+            cartList.addAll(list)
+            Log.e("Cart Fragment Print" ,  cartList.toString())
             if (list.isEmpty()) {
                 binding.rvPrintList.visibility = View.GONE
             } else {
@@ -192,7 +211,6 @@ class BlueToothPrint : AppCompatActivity() {
                 outputStream.write(byteArrayOf(0x1B, 0x40)) // Initialize printer
                 outputStream.write(text.toByteArray(Charsets.UTF_8))
                 outputStream.write("\n\n\n".toByteArray())
-                Log.e(outputStream.write("\n\n\n".toByteArray()).toString(),"printer deatils")
                 outputStream.flush()
 
                 outputStream.close()
