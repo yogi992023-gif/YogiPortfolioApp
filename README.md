@@ -183,7 +183,7 @@ Rolex Cellini | 1 | 8999.99
 Total: 51099.87
 
 *(bill print screenshot here)*
-<img src="bill_ss.jpg" width="300"/>
+<img src="screenshots/bill_ss.jpg" width="300"/>
 ---
 
 🧱 **Project Architecture**
