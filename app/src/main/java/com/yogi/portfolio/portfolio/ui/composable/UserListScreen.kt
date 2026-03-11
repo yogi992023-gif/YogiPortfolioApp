@@ -46,7 +46,9 @@ fun UserItem(user: User, onClick: () -> Unit) {
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
+
                 onClick()
+
             }
     ) {
 
