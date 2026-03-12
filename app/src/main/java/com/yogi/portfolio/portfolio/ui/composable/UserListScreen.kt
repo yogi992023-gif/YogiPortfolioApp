@@ -52,6 +52,7 @@ fun UserItem(user: User, onClick: () -> Unit) {
 
         Text(
             text = user.name,
+
             modifier = Modifier.padding(16.dp)
         )
     }
@@ -60,7 +61,6 @@ fun UserItem(user: User, onClick: () -> Unit) {
 @Preview
 @Composable
 fun UserListScreenPreview() {
-
 
     // Now the preview works perfectly because it doesn't need a real ViewModel
 }
