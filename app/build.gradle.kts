@@ -113,5 +113,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.database.ktx)
+    debugImplementation(libs.leakcanary.android)
+
 
 }

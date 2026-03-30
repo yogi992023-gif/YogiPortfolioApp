@@ -1,6 +1,8 @@
 package com.yogi.portfolio.portfolio.ui.composable
 
 import ChatViewModel
+import android.Manifest
+import android.app.Activity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,8 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
 import com.yogi.portfolio.portfolio.domain.model.Chat.User
 
 @Composable
@@ -53,6 +57,21 @@ fun UserItem(user: User, onClick: () -> Unit) {
             text = user.name,
 
             modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun LocationPermission() {
+
+    val context = LocalContext.current
+    val activity = context as Activity
+
+    LaunchedEffect(Unit) {
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            100
         )
     }
 }
