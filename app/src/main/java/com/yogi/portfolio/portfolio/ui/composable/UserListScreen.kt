@@ -30,7 +30,6 @@ fun UserListScreen(
     LazyColumn {
 
         items(users) { user ->
-
             UserItem(user) {
                 onUserClick(user)
             }
